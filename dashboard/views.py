@@ -1,11 +1,16 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-def patientIndex(request):
-    return render(request, 'dashboard/patientindex.html')
+@login_required
+def patientdashboard(request):
+    template_data = {
+        'title': 'Patient Dashboard',
+    }
+    return render(request, 'home/patient-dashboard-html-css/patient-dashboard.html', {'template_data': template_data})
 
-def hcpIndex(request):
-    return render(request, 'dashboard/hcpindex.html')
-
-def adminIndex(request):
-    return render(request, 'dashboard/adminindex.html')
+@login_required
+def professionaldashboard(request):
+    template_data = {
+        'title': 'Professional Dashboard',
+    }
+    return render(request, 'home/patient-dashboard-html-css/patient-dashboard.html', {'template_data': template_data})
