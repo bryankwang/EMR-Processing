@@ -15,6 +15,13 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# OpenAI API Key (should be moved to environment variable in production)
+OPENAI_API_KEY = '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'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
