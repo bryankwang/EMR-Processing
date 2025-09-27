@@ -20,7 +20,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # OpenAI API Key (should be moved to environment variable in production)
-# OPENAI_API_KEY = 'insert_your_openai_api_key_here'
+# INSERT API KEY HERE
 
 
 # Quick-start development settings - unsuitable for production
