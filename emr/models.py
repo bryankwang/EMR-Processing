@@ -4,30 +4,28 @@ from django.utils import timezone
 
 class Patient(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    date_of_birth = models.DateField()
-    gender = models.TextField()
-    address = models.TextField()
-    city = models.TextField()
-    state = models.TextField()
-    zip =  models.TextField()
-    phone_number = models.CharField(max_length=20)
-    emergency_contact = models.CharField(max_length=100)
-    emergency_contact_phone = models.CharField(max_length=20)
-    marital_status = models.CharField(max_length=20)
-    race_ethnicity = models.CharField(max_length=50)
-    insurance_provider = models.CharField(max_length=100)
-    insurance_policy_number = models.CharField(max_length=50)
-
-    # dk how todo this below rn
-    healthcare_providers = models.ManyToManyField('HealthcareProfessional', related_name='patients', blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    gender = models.TextField(blank=True, default='')
+    address = models.TextField(blank=True, default='')
+    city = models.TextField(blank=True, default='')
+    state = models.TextField(blank=True, default='')
+    zip = models.TextField(blank=True, default='')
+    phone_number = models.CharField(max_length=20, blank=True, default='')
+    emergency_contact = models.CharField(max_length=100, blank=True, default='')
+    emergency_contact_phone = models.CharField(max_length=20, blank=True, default='')
+    marital_status = models.CharField(max_length=20, blank=True, default='')
+    race_ethnicity = models.CharField(max_length=50, blank=True, default='')
+    insurance_provider = models.CharField(max_length=100, blank=True, default='')
+    insurance_policy_number = models.CharField(max_length=50, blank=True, default='')
+    healthcare_providers = models.ManyToManyField('HealthcareProfessional', through='PatientHCPRelationship', related_name='patients')
+    
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
 
 class HealthcareProfessional(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    specialty = models.CharField(max_length=100)
-    license_number = models.CharField(max_length=50)
-    patients = models.ManyToManyField(Patient, related_name='healthcare_professionals')
+    specialty = models.CharField(max_length=100, blank=True, default='')
+    license_number = models.CharField(max_length=50, blank=True, default='')
 
     def __str__(self):
         return f"Dr. {self.user.last_name}"
@@ -45,9 +43,9 @@ class Availability(models.Model):
 class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     hcp = models.ForeignKey(HealthcareProfessional, on_delete=models.CASCADE)
-    date = models.DateField()
-    time = models.TimeField()
-    status = models.CharField(max_length=20, choices=[
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
+    status = models.CharField(max_length=20, default='SCHEDULED', choices=[
         ('SCHEDULED', 'Scheduled'),
         ('COMPLETED', 'Completed'),
         ('CANCELLED', 'Cancelled')
@@ -57,13 +55,23 @@ class Appointment(models.Model):
 
 # NEEDS MODIFICATION TURN PROCESSED CONTENT INTO MULTIPLE FIELDS FOR EACH INPUT
 # API CALL PROMPT TO FILL OUT FIELDS BASED ON INPUT
+class PatientHCPRelationship(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='hcp_relationships')
+    hcp = models.ForeignKey(HealthcareProfessional, on_delete=models.CASCADE, related_name='patient_relationships')
+    date_added = models.DateTimeField(auto_now_add=True)
+    is_primary = models.BooleanField(default=False)
+    notes = models.TextField(blank=True)
+    
+    class Meta:
+        unique_together = ('patient', 'hcp')
+
 class EMR(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    weight = models.JSONField(max_digits=6, decimal_places=2)
-    height = models.JSONField(max_digits=5, decimal_places=2)
-    bmi = models.JSONField(max_digits=5, decimal_places=2)
+    weight = models.DecimalField(max_digits=6, decimal_places=2, default='0.00')
+    height = models.DecimalField(max_digits=5, decimal_places=2, default='0.00')
+    bmi = models.DecimalField(max_digits=5, decimal_places=2, default='0.00')
     created_at = models.DateTimeField(auto_now_add=True)
-    original_content = models.FileField()
+    original_content = models.FileField(upload_to='emr_files/')
     billing_information = models.JSONField(
         null=True, 
         blank=True,
@@ -88,7 +96,7 @@ class EMR(models.Model):
         }
         """
     )
-    status = models.CharField(max_length=20, choices=[
+    status = models.CharField(max_length=20, default='PROCESSING', choices=[
         ('PROCESSING', 'Processing'),
         ('COMPLETED', 'Completed'),
         ('ERROR', 'Error')

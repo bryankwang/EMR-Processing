@@ -32,7 +32,7 @@ class AppointmentAdmin(admin.ModelAdmin):
 
 @admin.register(EMR)
 class EMRAdmin(admin.ModelAdmin):
-    list_display = ('patient', 'created_by', 'created_at', 'status')
+    list_display = ('patient', 'created_at', 'status')
     list_filter = ('status', 'created_at')
     search_fields = ('patient__user__first_name', 'patient__user__last_name')
 
