@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -58,7 +58,8 @@ ROOT_URLCONF = 'EMR_Processing.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,
+                              'EMR_Processing/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,6 +73,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'EMR_Processing.wsgi.application'
+
+# Custom User Model
+AUTH_USER_MODEL = 'accounts.User'
 
 
 # Database
