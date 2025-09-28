@@ -66,9 +66,22 @@
 			
 			<div class="card-left-col-bottom">
 				<h2 class="card-left-subtitle">Welcome, </h2>
-				<h1 class="card-left-title">First LastName!</h1>
+				<h1 class="card-left-title">{{ firstname }} {{ lastname }}!</h1>
 				<p class="card-left-text-bottom">
-					
+					'dob': Patient.date_of_birth,
+					'gender': Patient.gender,
+					'address': Patient.address,
+					'city': Patient.city,
+					'state': Patient.state,
+					'zip': Patient.zip,
+					'phone': Patient.phone_number,
+					'er_contact': Patient.emergency_contact,
+					'er_phone': Patient.emergency_contact_phone,
+					'marital': Patient.marital_status,
+					'race_ethnicity': Patient.race_ethnicity,
+					'insurance_provider': Patient.insurance_provider,
+					'policy_number': Patient.insurance_policy_number,
+					'healthcare_provider': Patient.healthcare_providers
 				</p>
 			</div>
 		</div>

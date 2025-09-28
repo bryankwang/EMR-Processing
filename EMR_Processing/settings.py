@@ -131,7 +131,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'EMR_Processing', 'static'),
+    BASE_DIR / 'EMR_Processing/static/',
 ]
 
 # Default primary key field type
