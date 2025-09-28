@@ -62,26 +62,26 @@
 	
 	<div class="row2">
 		<div class="card-left">
-			<a class="card-left-link-edit-profile" href="#">Edit Profile</a>
+			<a class="card-left-link-edit-profile" href="#">Profile</a>
 			
 			<div class="card-left-col-bottom">
 				<h2 class="card-left-subtitle">Welcome, </h2>
-				<h1 class="card-left-title">{{ firstname }} {{ lastname }}!</h1>
+				<h1 class="card-left-title">{{firstname}} {{lastname}}!</h1>
 				<p class="card-left-text-bottom">
-					'dob': Patient.date_of_birth,
-					'gender': Patient.gender,
-					'address': Patient.address,
-					'city': Patient.city,
-					'state': Patient.state,
-					'zip': Patient.zip,
-					'phone': Patient.phone_number,
-					'er_contact': Patient.emergency_contact,
-					'er_phone': Patient.emergency_contact_phone,
-					'marital': Patient.marital_status,
-					'race_ethnicity': Patient.race_ethnicity,
-					'insurance_provider': Patient.insurance_provider,
-					'policy_number': Patient.insurance_policy_number,
-					'healthcare_provider': Patient.healthcare_providers
+					Date of Birth: {{dob}}<br>
+					Gender: {{gender}}<br>
+					Address: {{address}}<br>
+					City: {{city}}<br>
+					State: {{state}}<br>
+					Zip Code: {{zip}}<br>
+					Phone number: {{phone}}<br>
+					Emergency contact: {{er_contact}}<br>
+					Emergency phone number: {{er_phone}}<br>
+					Marital status: {{marital}}<br>
+					Race: {{race_ethnicity}}<br>
+					Insurance provider: {{insurance_provider}}<br>
+					Insurance policy number: {{policy_number}}<br>
+					Healthcare provider: {{healthcare_provider}}<br>
 				</p>
 			</div>
 		</div>

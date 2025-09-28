@@ -5,27 +5,33 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def logout(request):
     auth_logout(request)
-    return redirect('home.index')
+    return redirect('accounts.login')
 
 def login(request):
     template_data = {}
     template_data['title'] = 'Login'
+    
     if request.method == 'GET':
-        return render(request, 'accounts/log-in-html-css/log-in.html',
-            {'template_data': template_data})
+        # If user is already logged in, redirect them to appropriate dashboard
+        if request.user.is_authenticated:
+            if request.user.role == 'HCP':
+                return redirect('professional_dashboard')
+            else:
+                return redirect('patient_dashboard')
+        return render(request, 'accounts/log-in.html', {'template_data': template_data})
+    
     elif request.method == 'POST':
         user = authenticate(
             request,
-            username = request.POST['Username'],
-            password = request.POST['Password']
+            username=request.POST['Username'],
+            password=request.POST['Password']
         )
         if user is None:
-            template_data['error'] ='The username or password is incorrect.'
-            return render(request, 'accounts/log-in-html-css/log-in.html',
-                {'template_data': template_data})
-        else:
-            auth_login(request, user)
-            if user.role == 'professional':
-                return redirect('dashboard/templates/professional-dashboard.html')
-    
-    return redirect('dashboard/templates/patient-dashboard.html')
+            template_data['error'] = 'The username or password is incorrect.'
+            return render(request, 'accounts/log-in.html', {'template_data': template_data})
+        
+        auth_login(request, user)
+        if user.role == 'HCP':
+            return redirect('professional_dashboard')
+        
+        return redirect('patient_dashboard')

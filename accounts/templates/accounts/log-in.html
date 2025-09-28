@@ -1,70 +1,74 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
-  <meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/reset.css" />
-	<link rel="stylesheet" href="css/global.css" />
-	<link rel="stylesheet" href="css/log-in.css" />
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/log-in.css' %}" />
 </head>
 
 <body>
-	<div class="bg">
-		<object data="assets/bg-graphic1.svg" class="bg-graphic1" type="image/svg+xml"></object>
+    <div class="bg">
+        <object data="{% static 'assets/bg-graphic1.svg' %}" class="bg-graphic1" type="image/svg+xml"></object>
+        
+        <div class="column col1">
+            <object data="{% static 'assets/column/column-graphic1.svg' %}" class="column-graphic" type="image/svg+xml"></object>
+        </div>
+        
+        <object data="{% static 'assets/bg-graphic2.svg' %}" class="bg-graphic2" type="image/svg+xml"></object>
+        <object data="{% static 'assets/bg-graphic3.svg' %}" class="bg-graphic3" type="image/svg+xml"></object>
+        
+        <div class="column col2">
+            <object data="{% static 'assets/column/column-graphic2.svg' %}" class="column-graphic" type="image/svg+xml"></object>
+        </div>
+        
+        <div class="bg-halftones">
+            <img src="{% static 'assets/bg-vecteezy1.png' %}" class="bg-vecteezy1" />
+            <img src="{% static 'assets/bg-vecteezy2.png' %}" class="bg-vecteezy2" />
+        </div>
 		
-		<div class="column col1">
-			<object data="assets/column/column-graphic1.svg" class="column-graphic" type="image/svg+xml"></object>
-		</div>
-		
-		<object data="assets/bg-graphic2.svg" class="bg-graphic2" type="image/svg+xml"></object>
-		<object data="assets/bg-graphic3.svg" class="bg-graphic3" type="image/svg+xml"></object>
-		
-		<div class="column col2">
-			<object data="assets/column/column-graphic2.svg" class="column-graphic" type="image/svg+xml"></object>
-		</div>
-		
-		<div class="bg-halftones">
-			<img src="assets/bg-vecteezy1.png" class="bg-vecteezy1" />
-			<img src="assets/bg-vecteezy2.png" class="bg-vecteezy2" />
-		</div>
-		
-		<div class="bg-stripes">
-			<div class="bg-rect bg-rect1"></div>
-			<div class="bg-rect bg-rect2"></div>
-			<div class="bg-rect bg-rect3"></div>
-			<div class="bg-rect bg-rect4"></div>
-		</div>
-		
-		<div class="bg-rect bg-rect5"></div>
-		<object data="assets/bg-graphic4.svg" class="bg-graphic4" type="image/svg+xml"></object>
-		<object data="assets/bg-graphic5.svg" class="bg-graphic5" type="image/svg+xml"></object>
-		<object data="assets/bg-graphic6.svg" class="bg-graphic6" type="image/svg+xml"></object>
-		<object data="assets/bg-graphic7.svg" class="bg-graphic7" type="image/svg+xml"></object>
-		<object data="assets/bg-graphic8.svg" class="bg-graphic8" type="image/svg+xml"></object>
-	</div>
+        <div class="bg-stripes">
+            <div class="bg-rect bg-rect1"></div>
+            <div class="bg-rect bg-rect2"></div>
+            <div class="bg-rect bg-rect3"></div>
+            <div class="bg-rect bg-rect4"></div>
+        </div>
+        
+        <div class="bg-rect bg-rect5"></div>
+        <object data="{% static 'assets/bg-graphic4.svg' %}" class="bg-graphic4" type="image/svg+xml"></object>
+        <object data="{% static 'assets/bg-graphic5.svg' %}" class="bg-graphic5" type="image/svg+xml"></object>
+        <object data="{% static 'assets/bg-graphic6.svg' %}" class="bg-graphic6" type="image/svg+xml"></object>
+        <object data="{% static 'assets/bg-graphic7.svg' %}" class="bg-graphic7" type="image/svg+xml"></object>
+        <object data="{% static 'assets/bg-graphic8.svg' %}" class="bg-graphic8" type="image/svg+xml"></object>
+    </div>
 	
 	<div class="card-content-fields">
 		<h1 class="card-content-fields-title">LOG IN</h1>
 		
+		{% if template_data.error %}
+		<div class="alert alert-danger">
+			{{ template_data.error }}
+		</div>
+		{% endif %}
 
+		<form method="POST" action="{% url 'login' %}">
+			{% csrf_token %}
+			<div class="card-content-fields-col">
+				<div class="input-group">
+					<p class="input-group-text text">Username</p>
+					<input type="text" class="input-group-username" placeholder="Username" name="Username" required />
+				</div>
 
-		<div class="card-content-fields-col">
-
-			<div class="input-group">
-				<p class="input-group-text text">Username</p>
-				<input type="text" class="input-group-username" placeholder="Username" name="Username" />
-			</div>
-
-			<div class="input-group">
-				<p class="input-group-text text">Password</p>
-				<input type="text" class="input-group-username" placeholder="Password" name="Password" />
+				<div class="input-group">
+					<p class="input-group-text text">Password</p>
+					<input type="password" class="input-group-username" placeholder="Password" name="Password" required />
+				</div>
 			</div>
 			
-		</div>
-		
-		<button class="card-content-fields-btn-bottom hover-bright">SIGN IN</button>
+			<button type="submit" class="card-content-fields-btn-bottom hover-bright">SIGN IN</button>
+		</form>
 	</div>
 </body>
 
