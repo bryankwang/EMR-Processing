@@ -20,7 +20,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # OpenAI API Key (should be moved to environment variable in production)
-OPENAI_API_KEY = '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'
+OPENAI_API_KEY = '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'
 
 
 # Quick-start development settings - unsuitable for production
