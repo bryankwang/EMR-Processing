@@ -20,7 +20,7 @@ class Patient(models.Model):
     healthcare_providers = models.ManyToManyField('HealthcareProfessional', through='PatientHCPRelationship', related_name='patients')
     
     def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name}"
+        return f"{self.user.firstname} {self.user.lastname}"
 
 class HealthcareProfessional(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -28,7 +28,7 @@ class HealthcareProfessional(models.Model):
     license_number = models.CharField(max_length=50, blank=True, default='')
 
     def __str__(self):
-        return f"Dr. {self.user.last_name}"
+        return f"Dr. {self.user.firstname} {self.user.lastname}"
 
 class Availability(models.Model):
     hcp = models.ForeignKey(HealthcareProfessional, on_delete=models.CASCADE)
@@ -52,9 +52,6 @@ class Appointment(models.Model):
     ])
     notes = models.TextField(blank=True)
 
-
-# NEEDS MODIFICATION TURN PROCESSED CONTENT INTO MULTIPLE FIELDS FOR EACH INPUT
-# API CALL PROMPT TO FILL OUT FIELDS BASED ON INPUT
 class PatientHCPRelationship(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='hcp_relationships')
     hcp = models.ForeignKey(HealthcareProfessional, on_delete=models.CASCADE, related_name='patient_relationships')
@@ -67,9 +64,9 @@ class PatientHCPRelationship(models.Model):
 
 class EMR(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    weight = models.DecimalField(max_digits=6, decimal_places=2, default='0.00')
-    height = models.DecimalField(max_digits=5, decimal_places=2, default='0.00')
-    bmi = models.DecimalField(max_digits=5, decimal_places=2, default='0.00')
+    weight = models.JSONField(null=True, blank=True)
+    height = models.JSONField(null=True, blank=True)
+    bmi = models.JSONField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     original_content = models.FileField(upload_to='emr_files/')
     billing_information = models.JSONField(

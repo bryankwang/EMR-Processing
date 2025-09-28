@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+  <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/global.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/patient-dashboard.css' %}" />
+	<style>
+		.admin-container {
+			display: flex;
+			gap: 20px;
+			padding: 20px;
+		}
+		.card {
+			backdrop-filter: blur(12.7px);
+			background: radial-gradient(
+				88% 88% at 50% 50%, 
+				rgba(28, 42, 137, 0) 0%, #00083f 100%
+			), linear-gradient(180deg, rgba(126, 246, 238, 0.5) 0%, rgba(255, 255, 255, 0.17) 100%);
+			background-blend-mode: screen;
+			border-radius: 15px;
+			padding: 20px;
+			border: 2px solid rgba(73, 187, 248, 0.41);
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			margin-top: 60px;
+			margin-bottom: 20px;
+		}
+		.form-group {
+			margin-bottom: 15px;
+		}
+		.form-group label {
+			display: block;
+			margin-bottom: 5px;
+			font-weight: 500;
+            color: #eee;
+		}
+		.form-group input, .form-group select, .form-group textarea {
+			box-shadow: inset 0px 3px 4.5px 0px rgba(0, 0, 0, 0.37);
+			width: 100%;
+			max-width: 500px;
+			color: #333;
+			font-size: 15px;
+			font-weight: 400;
+			letter-spacing: 0px;
+			text-align: left;
+			padding: 12px 20px;
+			box-sizing: border-box;
+			border-radius: 10px;
+			margin-bottom: 5px;
+			background: rgba(255, 255, 255, 0.9);
+			border: 1px solid rgba(73, 187, 248, 0.41);
+		}
+        .form-group textarea {
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            min-height: 60px;
+        }
+        .form-group small {
+            display: block;
+            color: #a0fbb6;
+            font-size: 12px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+		.btn-submit {
+			box-shadow: inset 0px 4px 4px 0px rgba(255, 255, 255, 0.25);
+			margin-top: 24px;
+			min-height: 47px;
+			flex-shrink: 0;
+			color: #264586;
+			font-size: 15px;
+			font-family: 'Poppins', sans-serif;
+			font-weight: 500;
+			letter-spacing: 0px;
+			text-align: center;
+			align-self: flex-end;
+			margin-left: auto;
+			background: linear-gradient(180deg, #a0fbb6 0%, #4ad3b3 100%) top left / auto auto no-repeat;
+			padding: 2px 18px 0 22px;
+			border-radius: 25px;
+		}
+		.btn-submit:hover {
+			filter: brightness(1.2);
+			transition: filter 0.2s;
+		}
+		.relationships-list {
+			margin-top: 20px;
+		}
+		.relationships-list li {
+			padding: 10px;
+			border-bottom: 1px solid #eee;
+		}
+		.section-title {
+			text-shadow: 0px 4px 4px rgba(25, 40, 135, 0.27);
+			color: #eee;
+			margin-bottom: 15px;
+			font-size: 1.5em;
+			font-weight: 600;
+		}
+		.card-left {
+			flex: 1;
+			max-width: 400px;
+		}
+		.card-right {
+			flex: 2;
+		}
+		.messages {
+			margin-bottom: 20px;
+		}
+		.message {
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: 4px;
+		}
+		.message.success {
+			background: #d4edda;
+			color: #155724;
+		}
+		.message.error {
+			background: #f8d7da;
+			color: #721c24;
+		}
+	</style>
+</head>
+
+<body>
+	<img src="{% static 'assets/NAVBAR.png' %}" class="nav-bar" />
+	
+	<div class="row1">
+		<a class="text" href="{% url 'patient_dashboard' %}">Dashboard</a>
+		<p class="text">Messages</p>
+		<p class="text">Appointments</p>
+		<p class="text">Profile</p>
+	</div>
+
+	<div class="admin-container">
+		<div class="card-right">
+			<div class="card">
+                <h2 class="section-title">EMR Editor</h2>
+                <form method="POST" action="{% url 'emr_editor' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="emr_id" value="{{ template_data.emr.id }}">
+                    <input type="hidden" name="patient_id" value="{{ template_data.patient.id }}">
+                
+                    <div class="form-group">
+                        <label for="weight">Weight (JSON):</label>
+                        <textarea id="weight" name="weight" rows="2" style="font-family: 'Courier New', monospace;">{{ template_data.emr.weight|default:'{"value": 70.5, "unit": "kg"}' }}</textarea>
+                        <small>Format: {"value": 70.5, "unit": "kg"}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Height (JSON):</label>
+                        <textarea id="height" name="height" rows="2" style="font-family: 'Courier New', monospace;">{{ template_data.emr.height|default:'{"value": 175.0, "unit": "cm"}' }}</textarea>
+                        <small>Format: {"value": 175.0, "unit": "cm"}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="medical_history">Medical History (JSON array of objects):</label>
+                        <textarea id="medical_history" name="medical_history" rows="3" style="width: 100%; max-width: 500px; border-radius: 10px; padding: 10px;">{{ template_data.emr.medical_history }}</textarea>
+                        <small>Example: [{"condition": "Asthma", "diagnosed": "2010"}, {"condition": "Hypertension", "diagnosed": "2015"}]</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="family_history">Family History (JSON array of objects):</label>
+                        <textarea id="family_history" name="family_history" rows="3" style="width: 100%; max-width: 500px; border-radius: 10px; padding: 10px;">{{ template_data.emr.family_history }}</textarea>
+                        <small>Example: [{"relation": "Father", "condition": "Diabetes"}, {"relation": "Mother", "condition": "Hypertension"}]</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="social_history">Social History (JSON array of objects):</label>
+                        <textarea id="social_history" name="social_history" rows="3" style="width: 100%; max-width: 500px; border-radius: 10px; padding: 10px;">{{ template_data.emr.social_history }}</textarea>
+                        <small>Example: [{"type": "Smoking", "status": "Never"}, {"type": "Alcohol", "status": "Occasional"}]</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="allergies">Allergies (JSON array):</label>
+                        <textarea id="allergies" name="allergies" rows="2" style="width: 100%; max-width: 500px; border-radius: 10px; padding: 10px;">{{ template_data.emr.allergies }}</textarea>
+                        <small>Example: ["Penicillin", "Peanuts"]</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="medications">Medications (JSON array of objects):</label>
+                        <textarea id="medications" name="medications" rows="3" style="width: 100%; max-width: 500px; border-radius: 10px; padding: 10px;">{{ template_data.emr.medications }}</textarea>
+                        <small>Example: [{"name": "Lisinopril", "dosage": "10mg", "frequency": "daily"}]</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="vitals">Vitals (JSON object):</label>
+                        <textarea id="vitals" name="vitals" rows="2" style="width: 100%; max-width: 500px; border-radius: 10px; padding: 10px;">{{ template_data.emr.vitals }}</textarea>
+                        <small>Example: {"blood_pressure": "120/80", "heart_rate": "72", "temperature": "98.6"}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="test_ordered">Tests Ordered (JSON array of objects):</label>
+                        <textarea id="test_ordered" name="test_ordered" rows="2" style="width: 100%; max-width: 500px; border-radius: 10px; padding: 10px;">{{ template_data.emr.test_ordered }}</textarea>
+                        <small>Example: [{"name": "Blood Test", "date": "2023-09-28"}]</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="test_results">Test Results (JSON array of objects):</label>
+                        <textarea id="test_results" name="test_results" rows="3" style="width: 100%; max-width: 500px; border-radius: 10px; padding: 10px;">{{ template_data.emr.test_results }}</textarea>
+                        <small>Example: [{"test": "Blood Test", "result": "Normal", "date": "2023-09-28"}]</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes:</label>
+                        <textarea id="notes" name="notes" rows="3" style="width: 100%; max-width: 500px; border-radius: 10px; padding: 10px;">{{ template_data.emr.notes }}</textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Save Changes</button>
+                </form>
+		    </div>
+		</div>
+
+			{% if messages %}
+			<div class="messages">
+				{% for message in messages %}
+					<div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<!-- Modal skeleton for add/edit user (to be implemented) -->
+	<div id="user-modal" class="modal" style="display:none;">
+		<div class="row2 admin-management">
+			<div class="card-left admin-left">
+				<h2 class="admin-title">User Management</h2>
+				<p class="admin-desc">Manage patients and healthcare professionals. Use the controls to search, add, edit, or remove users.</p>
+				<div class="admin-controls">
+					<input type="text" id="user-search" placeholder="Search users by name or email" />
+					<button id="btn-add-user" class="btn-primary">Add User</button>
+				</div>
+			
+				<div class="admin-tabs">
+					<button class="tab active" data-filter="all">All</button>
+					<button class="tab" data-filter="patients">Patients</button>
+					<button class="tab" data-filter="professionals">Professionals</button>
+				</div>
+			</div>
+
+			<div class="msgs-appts admin-right">
+				<div class="msgs-appts-box">
+					<table class="admin-table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Role</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in template_data.users %}
+							<tr data-role="{{ user.role }}">
+								<td>{{ user.first_name }} {{ user.last_name }}</td>
+								<td>{{ user.email }}</td>
+								<td>{{ user.role }}</td>
+								<td>
+									<a href="{% url 'admin_edit_user' user.id %}">Edit</a> |
+									<a href="{% url 'admin_delete_user' user.id %}" class="danger">Delete</a>
+								</td>
+							</tr>
+							{% empty %}
+							<tr><td colspan="4">No users found.</td></tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>

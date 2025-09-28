@@ -33,5 +33,8 @@ def login(request):
         auth_login(request, user)
         if user.role == 'HCP':
             return redirect('professional_dashboard')
+        elif user.role == 'admin':
+            return redirect('admin_management')
         
         return redirect('patient_dashboard')
+

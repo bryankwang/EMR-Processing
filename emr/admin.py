@@ -6,18 +6,46 @@ from .models import (
     Appointment, 
     EMR, 
     EMRComment, 
-    Message
+    Message,
+    PatientHCPRelationship
 )
+
+class PatientHCPInline(admin.TabularInline):
+    model = PatientHCPRelationship
+    extra = 1
+    fk_name = 'patient'
 
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
-    list_display = ('user', 'date_of_birth', 'phone_number')
-    search_fields = ('user__first_name', 'user__last_name', 'phone_number')
+    list_display = ('user', 'date_of_birth', 'phone_number', 'get_healthcare_providers')
+    search_fields = ('user__firstname', 'user__lastname', 'phone_number')
+    inlines = [PatientHCPInline]
+    
+    def get_healthcare_providers(self, obj):
+        return ", ".join([str(hcp) for hcp in obj.healthcare_providers.all()])
+    get_healthcare_providers.short_description = 'Healthcare Providers'
+
+class PatientInline(admin.TabularInline):
+    model = PatientHCPRelationship
+    extra = 1
+    fk_name = 'hcp'
 
 @admin.register(HealthcareProfessional)
 class HealthcareProfessionalAdmin(admin.ModelAdmin):
-    list_display = ('user', 'specialty', 'license_number')
+    list_display = ('user', 'specialty', 'license_number', 'get_patients')
     search_fields = ('user__first_name', 'user__last_name', 'specialty')
+    inlines = [PatientInline]
+    
+    def get_patients(self, obj):
+        return ", ".join([str(patient) for patient in obj.patients.all()])
+    get_patients.short_description = 'Patients'
+
+@admin.register(PatientHCPRelationship)
+class PatientHCPRelationshipAdmin(admin.ModelAdmin):
+    list_display = ('patient', 'hcp', 'date_added', 'is_primary')
+    list_filter = ('is_primary', 'date_added')
+    search_fields = ('patient__user__first_name', 'patient__user__last_name',
+                    'hcp__user__first_name', 'hcp__user__last_name')
 
 @admin.register(Availability)
 class AvailabilityAdmin(admin.ModelAdmin):

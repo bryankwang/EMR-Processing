@@ -1,9 +1,6 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
   <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,48 +12,15 @@
 </head>
 
 <body>
-	<div class="bg">
-		<object data="{% static 'assets/bg-graphic1.svg' %}" class="bg-graphic1" type="image/svg+xml"></object>
-		
-		<div class="column col1">
-			<object data="{% static 'assets/column/column-graphic1.svg' %}" class="column-graphic" type="image/svg+xml"></object>
-		</div>
-		
-		<object data="{% static 'assets/bg-graphic2.svg' %}" class="bg-graphic2" type="image/svg+xml"></object>
-		<object data="{% static 'assets/bg-graphic3.svg' %}" class="bg-graphic3" type="image/svg+xml"></object>
-		
-		<div class="column col2">
-			<object data="{% static 'assets/column/column-graphic2.svg' %}" class="column-graphic" type="image/svg+xml"></object>
-		</div>
-		
-		<div class="bg-halftones">
-			<img src="{% static 'assets/bg-vecteezy1.png' %}" class="bg-vecteezy1" />
-			<img src="{% static 'assets/bg-vecteezy2.png' %}" class="bg-vecteezy2" />
-		</div>
-		
-		<div class="bg-stripes">
-			<div class="bg-rect bg-rect1"></div>
-			<div class="bg-rect bg-rect2"></div>
-			<div class="bg-rect bg-rect3"></div>
-			<div class="bg-rect bg-rect4"></div>
-		</div>
-		
-		<div class="bg-rect bg-rect5"></div>
-		<object data="assets/bg-graphic4.svg" class="bg-graphic4" type="image/svg+xml"></object>
-		<object data="assets/bg-graphic5.svg" class="bg-graphic5" type="image/svg+xml"></object>
-		<object data="assets/bg-graphic6.svg" class="bg-graphic6" type="image/svg+xml"></object>
-		<object data="assets/bg-graphic7.svg" class="bg-graphic7" type="image/svg+xml"></object>
-		<object data="assets/bg-graphic8.svg" class="bg-graphic8" type="image/svg+xml"></object>
-	</div>
 	
-	<img src="assets/nav-bar.png" class="nav-bar" />
-	<object data="assets/graphic1.svg" class="graphic1" type="image/svg+xml"></object>
-	<object data="assets/graphic2.svg" class="graphic2" type="image/svg+xml"></object>
-	
+	<img src="{% static 'assets/NAVBAR.png' %}" class="nav-bar" />
+	<img src="{% static 'assets/LOGO.png' %}" class="logo" />
+	<img src="{% static 'assets/WORDMARK.png' %}" class="wordmark" />
+
 	<div class="row1">
 		<p class="text">Dashboard</p>
 		<p class="text">Messages</p>
-		<p class="text">Appointment</p>
+		<a class="text" href="{% url 'patient_appointments' %}">Appointments</a>
 		<p class="text">Profile</p>
 	</div>
 	
@@ -66,22 +30,27 @@
 			
 			<div class="card-left-col-bottom">
 				<h2 class="card-left-subtitle">Welcome, </h2>
-				<h1 class="card-left-title">{{firstname}} {{lastname}}!</h1>
+				<h1 class="card-left-title">{{template_data.firstname}} {{template_data.lastname}}!</h1>
 				<p class="card-left-text-bottom">
-					Date of Birth: {{dob}}<br>
-					Gender: {{gender}}<br>
-					Address: {{address}}<br>
-					City: {{city}}<br>
-					State: {{state}}<br>
-					Zip Code: {{zip}}<br>
-					Phone number: {{phone}}<br>
-					Emergency contact: {{er_contact}}<br>
-					Emergency phone number: {{er_phone}}<br>
-					Marital status: {{marital}}<br>
-					Race: {{race_ethnicity}}<br>
-					Insurance provider: {{insurance_provider}}<br>
-					Insurance policy number: {{policy_number}}<br>
-					Healthcare provider: {{healthcare_provider}}<br>
+					Date of Birth: {{template_data.dob}}<br>
+					Gender: {{template_data.gender}}<br>
+					Address: {{template_data.address}}<br>
+					City: {{template_data.city}}<br>
+					State: {{template_data.state}}<br>
+					Zip Code: {{template_data.zip}}<br>
+					Phone number: {{template_data.phone}}<br>
+					Emergency contact: {{template_data.er_contact}}<br>
+					Emergency phone number: {{template_data.er_phone}}<br>
+					Marital status: {{template_data.marital}}<br>
+					Race: {{template_data.race_ethnicity}}<br>
+					Insurance provider: {{template_data.insurance_provider}}<br>
+					Insurance policy number: {{template_data.policy_number}}<br>
+					Healthcare providers:
+					<ul>
+					{% for provider in template_data.healthcare_providers %}
+						<li>{{ provider }}</li>
+					{% endfor %}
+					</ul><br>
 				</p>
 			</div>
 		</div>
@@ -89,16 +58,26 @@
 		<div class="msgs-appts">
 			<div class="msgs-appts-box">
 				<div class="msgs-appts-glass-box"></div>
-				<object data="assets/msgs-appts-arrow-up.svg" class="msgs-appts-arrow-up-right msgs-appts-arrow-up1" type="image/svg+xml"></object>
+				<object data="{% static 'assets/msgs-appts-arrow-up.svg' %}" class="msgs-appts-arrow-up-right msgs-appts-arrow-up1" type="image/svg+xml"></object>
 				<h2 class="msgs-appts-subtitle-messages">Messages</h2>
 			</div>
 			
 			<div class="msgs-appts-group">
-				<object data="assets/msgs-appts-arrow-up.svg" class="msgs-appts-arrow-up-right msgs-appts-arrow-up2" type="image/svg+xml"></object>
+				<object data="{% static 'assets/msgs-appts-arrow-up.svg' %}" class="msgs-appts-arrow-up-right msgs-appts-arrow-up2" type="image/svg+xml"></object>
+				
 				<h2 class="msgs-appts-subtitle-your-appointments">Your Appointments</h2>
+				<ul>
+					{% for appointment in template_data.appointments %}
+						<li>
+						{{ appointment.date }}: {{appointment.hcp.firstname}} {{appointment.hcp.lastname}} - {{ appointment.notes }}
+						</li>
+					{% empty %}
+						<li>No appointments found.</li>
+					{% endfor %}
 			</div>
 		</div>
 	</div>
+
 </body>
 
 </html>

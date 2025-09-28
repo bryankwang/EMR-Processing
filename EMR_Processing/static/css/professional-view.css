@@ -7,13 +7,35 @@ body {
 	font-family: 'Poppins';
 	line-height: normal;
 	letter-spacing: 0px;
-	background-color: #1b376c;
+	background-image: url("../assets/DASHBG.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
 	overflow: auto;
-	--minContent: 0;
-	--hSizing: FILL;
-	--vSizing: FILL;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: STRETCH;
+}
+
+.nav-bar { 
+	position: fixed;
+  	top: 0; left: 0;
+ 	width: 100vw;
+	z-index: 9000;
+	margin: 0;
+  	padding: 0;
+}
+
+.logo {
+	position: fixed; top: 20px; left: 25px; 
+	width: 40px;
+	aspect-ratio: 1 / 1;
+	z-index: 9002;
+}
+
+.wordmark {
+	position: fixed; top: 23px; left: 78px; 
+	width: 120px;
+	aspect-ratio: 3.5 / 1;
+	z-index: 9003;
 }
 
 .bg-rect {
@@ -22,54 +44,20 @@ body {
 	background-position: top left;
 	background-size: auto auto;
 	background-repeat: no-repeat;
-	--minContent: 519;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
 }
 
 .row-text-a {
 	text-align: center;
-	--minContent: 123;
-	--hSizing: FILL;
-	--vSizing: HUG;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: MIN;
 }
 
 .row-text-b {
 	text-align: left;
-	--minContent: 123;
-	--hSizing: FILL;
-	--vSizing: HUG;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: MIN;
 }
 
 .msgs-appts-arrow-up-right {
 	position: absolute;
 	width: 32px; height: 32px;
-	--minContent: 32;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
 }
-
-.bg {
-	position: absolute; top: -819px; left: -342px; right: -582px; 
-	mix-blend-mode: color-dodge;
-	opacity: 0.21;
-	height: 2449px;
-	--minContent: 0;
-	--hSizing: FILL;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: MIN;
-}
-
-
 
 /* column */
 
@@ -78,34 +66,14 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	--minContent: 1392;
-	--hSizing: HUG;
-	--vSizing: HUG;
 }
 
 .column-graphic {
 	margin: 0 auto;
 	width: 90%;
 	flex-shrink: 0;
-	--minContent: 982;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: CENTER;
-	--pConstraintVertical: MIN;
 }
 /* end column*/
-
-
-.bg-graphic1 {
-	position: absolute; top: 1274px; left: 342px; 
-	width: calc(100% - 684px); height: 332px;
-	max-width: 690px;
-	--minContent: 448;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
 
 .col1 {
 	top: 862px; left: 462px; 
@@ -115,28 +83,6 @@ body {
 	margin-bottom: -41px;
 	height: 979px;
 	max-width: 1512px;
-}
-
-.bg-graphic2 {
-	position: absolute; top: 698px; left: 1180px; 
-	width: calc(100% - 2360px); height: 646px;
-	max-width: 584px;
-	--minContent: 379;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.bg-graphic3 {
-	position: absolute; top: 1296px; left: 304px; 
-	width: calc(100% - 608px); height: 488px;
-	max-width: 596px;
-	--minContent: 387;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
 }
 
 .col2 {
@@ -149,173 +95,22 @@ body {
 	max-width: 1656px;
 }
 
-.bg-halftones {
-	position: absolute; top: 0; left: 0; 
-	width: calc(100% - 0px); height: 2449px;
-	max-width: 2436px;
-	--minContent: 0;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.bg-vecteezy1 {
-	position: absolute; top: 1243px; left: 853px; 
-	transform-origin: 50% 50%;
-	width: calc(100% - 1706px);
-	max-width: 1455px;
-	--minContent: 945;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.bg-vecteezy2 {
-	position: absolute; top: 294px; left: 140px; 
-	transform-origin: 50% 50%;
-	width: calc(100% - 280px);
-	max-width: 1400px;
-	--minContent: 910;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.bg-stripes {
-	position: absolute; top: 911px; left: 156px; 
-	width: calc(100% - 312px); height: 922px;
-	max-width: 1818px;
-	--minContent: 0;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.bg-rect1 {
-	top: 256px; left: -62px; 
-	rotate: 37deg;
-	width: calc(100% - -124px); height: 63px;
-	max-width: 798px;
-	background-image: linear-gradient(90deg, rgba(110, 227, 165, 0.59) 138%, rgba(110, 227, 219, 0) 404%);
-}
-
-.bg-rect2 {
-	top: 128px; left: 56px; 
-	rotate: 37deg;
-	width: calc(100% - 112px); height: 30px;
-	max-width: 436px;
-	background-image: linear-gradient(90deg, rgba(110, 227, 165, 0.59) 132%, rgba(110, 227, 219, 0) 387%);
-}
-
-.bg-rect3 {
-	top: 575px; left: 922px; 
-	rotate: -143deg;
-	width: calc(100% - 1844px); height: 58px;
-	max-width: 977px;
-	background-image: linear-gradient(90deg, rgba(110, 227, 165, 0.59) 82%, rgba(110, 227, 219, 0) 376%);
-}
-
-.bg-rect4 {
-	top: 555px; left: 1283px; 
-	rotate: -143deg;
-	width: calc(100% - 2566px); height: 28px;
-	max-width: 460px;
-	background-image: linear-gradient(90deg, rgba(110, 227, 165, 0.59) 82%, rgba(110, 227, 219, 0) 374%);
-}
-
-.bg-rect5 {
-	top: 834px; left: 331px; 
-	width: calc(100% - 662px); height: 982px;
-	max-width: 1512px;
-	background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.07) 50%, rgba(255, 255, 255, 0) 100%);
-}
-
-.bg-graphic4 {
-	position: absolute; top: 818px; left: 525px; 
-	width: calc(100% - 1050px); height: 1068px;
-	max-width: 1376px;
-	--minContent: 895;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.bg-graphic5 {
-	position: absolute; top: 819px; left: 676px; 
-	width: calc(100% - 1352px); height: 112px;
-	max-width: 853px;
-	--minContent: 554;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.bg-graphic6 {
-	position: absolute; top: 819px; left: 393px; 
-	width: calc(100% - 786px); height: 164px;
-	max-width: 1034px;
-	--minContent: 672;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.bg-graphic7 {
-	position: absolute; top: 1440px; left: 1375px; 
-	width: calc(100% - 2750px); height: 510px;
-	max-width: 589px;
-	--minContent: 383;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.bg-graphic8 {
-	position: absolute; top: 1568px; left: 904px; 
-	width: calc(100% - 1808px); height: 415px;
-	max-width: 960px;
-	--minContent: 624;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.nav-bar {
-	position: absolute; z-index: 3; top: 0; left: 0; right: 0; 
-	width: 100%;
-	--minContent: 983;
-	--hSizing: FILL;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: MIN;
-}
 
 .row1 {
-	position: absolute; z-index: 4; top: 29px; left: 50%; 
+	position: fixed; top: 28px; left: 50%; 
 	translate: -50% 0;
-	box-shadow: 0px 3px 4px 0px rgba(25, 40, 135, 0.44);
-	margin-left: 48px;
+	/* box-shadow: 0px 3px 4px 0px rgba(25, 40, 135, 0.44); */
+	margin-left: 26px;
 	width: calc(100% - 32px);
-	max-width: 592px;
+	max-width: 537px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	font-size: 20px;
 	font-weight: 500;
-	--minContent: 514;
-	--hSizing: FIXED;
-	--vSizing: HUG;
-	--pConstraintHorizontal: CENTER;
-	--pConstraintVertical: MIN;
+	letter-spacing: 0px;
+	text-align: left;
+	z-index: 9001;
 }
 
 .text {
@@ -341,27 +136,24 @@ body {
 }
 
 .card-left {
-	backdrop-filter: blur(12.7px);
+	backdrop-filter: blur(5px);
 	box-shadow: 0px 4px 14.1px 0px rgba(25, 40, 135, 0.39);
 	margin-top: 1px;
 	width: 100%;
+	height: 100%;
 	max-width: 699px;
 	display: flex;
 	flex-direction: column;
-	gap: 13px;
 	flex-shrink: 0;
-	background: radial-gradient(
+	background: linear-gradient(180deg, rgba(126, 246, 238, 0.527) 0%, rgba(255, 255, 255, 0) 100%), 
+	radial-gradient(
 		88% 88% at 50% 50%, 
-		rgba(28, 42, 137, 0) 0%, #00083f 100%
-	) top left / auto auto no-repeat, linear-gradient(180deg, rgba(164, 255, 166, 0.5) 0%, rgba(255, 255, 255, 0.17) 100%) top left / auto auto no-repeat;
-	padding: 48px 23px 211px 23px;
+		rgba(28, 42, 137, 0) 0%, #00083f58 100%
+	);
+	background-blend-mode: screen;
+	padding: 32px 24px 24px 24px;
 	border: 2px solid rgba(73, 187, 248, 0.41);
 	border-radius: 25px;
-	--minContent: 699;
-	--hSizing: FIXED;
-	--vSizing: HUG;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
 }
 
 .card-left-title {
@@ -369,11 +161,6 @@ body {
 	font-size: 64px;
 	font-weight: 700;
 	letter-spacing: -1.9px;
-	--minContent: 649;
-	--hSizing: FILL;
-	--vSizing: HUG;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: MIN;
 }
 
 .card-left-row {
@@ -382,11 +169,6 @@ body {
 	justify-content: space-between;
 	font-size: 20px;
 	padding: 0 5px;
-	--minContent: 302;
-	--hSizing: FILL;
-	--vSizing: HUG;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: MIN;
 }
 
 .card-left-text-upcoming {
@@ -440,11 +222,6 @@ body {
 	border: 1px solid rgba(25, 27, 135, 0.22);
 	border-radius: 25px;
 	overflow: hidden;
-	--minContent: 310;
-	--hSizing: FIXED;
-	--vSizing: HUG;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
 }
 
 .row-col-left {
@@ -458,33 +235,18 @@ body {
 	background: linear-gradient(180deg, #a7f3dd 0%, #77dfd6 100%) top left / auto auto no-repeat;
 	padding: 14px 8px 13px 8px;
 	border-radius: 25px;
-	--minContent: 100;
-	--hSizing: FIXED;
-	--vSizing: HUG;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: CENTER;
 }
 
 .row-subtitle {
 	font-size: 48px;
 	font-family: 'Helvetica Rounded';
 	font-weight: 700;
-	--minContent: 84;
-	--hSizing: FILL;
-	--vSizing: HUG;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: MIN;
 }
 
 .row-text-sept {
 	margin-top: -6px;
 	font-size: 15px;
 	font-weight: 600;
-	--minContent: 84;
-	--hSizing: FILL;
-	--vSizing: HUG;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: MIN;
 }
 
 .row-col-right {
@@ -493,61 +255,41 @@ body {
 	flex-grow: 1;
 	font-size: 16px;
 	font-weight: 400;
-	--minContent: 123;
-	--hSizing: FILL;
-	--vSizing: HUG;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: CENTER;
 }
 /* end row*/
 
 
 .msgs-appts {
-	margin-bottom: 6px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 25px;
-	align-self: stretch;
-	font-size: 24px;
-	font-weight: 600;
-	padding-left: 1px;
-	--minContent: 500;
-	--hSizing: HUG;
-	--vSizing: FILL;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: STRETCH;
+	display: grid;
+  	grid-template-columns: 1fr; /* or repeat(n, 1fr) for multiple columns */
+  	grid-gap: 0px;
+  	justify-items: center;
+  	align-items: start;
 }
 
 .msgs-appts-box {
 	position: relative;
 	margin-left: 1px;
+	margin-bottom: 25px;
 	padding: 25px 353px 240px 24px;
-	--minContent: 500;
-	--hSizing: HUG;
-	--vSizing: HUG;
-	--pConstraintHorizontal: CENTER;
-	--pConstraintVertical: MIN;
 }
 
 .msgs-appts-glass-box {
 	position: absolute; top: 0; left: 0; 
-	backdrop-filter: blur(12.7px);
+	backdrop-filter: blur(5px);
 	box-shadow: 0px 4px 14.1px 0px rgba(25, 40, 135, 0.39);
-	width: calc(100% - 0px); height: 301px;
+	width: 100%; height: 301px;
 	max-width: 500px;
-	background: radial-gradient(
+	margin-left: 1px;
+	padding: 25px 353px 240px 24px;
+	background: linear-gradient(180deg, rgba(126, 246, 238, 0.527) 0%, rgba(255, 255, 255, 0) 100%), 
+	radial-gradient(
 		88% 88% at 50% 50%, 
-		rgba(28, 42, 137, 0) 0%, #00083f 100%
-	) top left / auto auto no-repeat, linear-gradient(180deg, rgba(164, 255, 166, 0.5) 0%, rgba(255, 255, 255, 0.17) 100%) top left / auto auto no-repeat;
+		rgba(28, 42, 137, 0) 0%, #00083f58 100%
+	);
+	background-blend-mode: screen;
 	border: 2px solid rgba(73, 187, 248, 0.41);
 	border-radius: 25px;
-	--minContent: 329;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
 }
 
 .msgs-appts-arrow-up1 {
@@ -557,30 +299,25 @@ body {
 .msgs-appts-subtitle-messages {
 	position: relative; z-index: 1;
 	text-shadow: 0px 4px 4px rgba(25, 40, 135, 0.27);
-	--minContent: 123;
-	--hSizing: HUG;
-	--vSizing: HUG;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
 }
 
 .msgs-appts-group {
 	position: relative;
-	backdrop-filter: blur(12.7px);
+	backdrop-filter: blur(5px);
 	box-shadow: 0px 4px 14.1px 0px rgba(25, 40, 135, 0.39);
 	margin-left: 1px;
-	background: radial-gradient(
+	margin-top: 5px;
+	margin-bottom: 25px;
+	height: 350px;
+	background: linear-gradient(180deg, rgba(126, 246, 238, 0.527) 0%, rgba(255, 255, 255, 0) 100%), 
+	radial-gradient(
 		88% 88% at 50% 50%, 
-		rgba(28, 42, 137, 0) 0%, #00083f 100%
-	) top left / auto auto no-repeat, linear-gradient(180deg, rgba(164, 255, 166, 0.46) 0%, rgba(255, 255, 255, 0.15) 100%) top left / auto auto no-repeat;
-	padding: 23px 236px 362px 23px;
+		rgba(28, 42, 137, 0) 0%, #00083f42 100%
+	);
+	background-blend-mode: screen;
+	padding: 25px 353px 240px 24px;
 	border: 2px solid rgba(73, 187, 248, 0.4);
 	border-radius: 25px;
-	--minContent: 500;
-	--hSizing: HUG;
-	--vSizing: HUG;
-	--pConstraintHorizontal: CENTER;
-	--pConstraintVertical: MIN;
 }
 
 .msgs-appts-arrow-up2 {
@@ -589,15 +326,10 @@ body {
 
 .msgs-appts-subtitle-your-appointments {
 	text-shadow: 0px 4px 4px rgba(25, 40, 135, 0.27);
-	--minContent: 237;
-	--hSizing: HUG;
-	--vSizing: HUG;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
 }
 
 .row7 {
-	position: absolute; z-index: 6; top: 23px; left: 88px; 
+	position: absolute; z-index: 6; top: 20px; left: 98px; 
 	width: 132px;
 	display: flex;
 	align-items: center;
@@ -605,23 +337,6 @@ body {
 	color: #a2fbd8;
 	font-size: 16px;
 	font-weight: 700;
-	--minContent: 132;
-	--hSizing: FIXED;
-	--vSizing: HUG;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
-.graphic1 {
-	margin-left: -4px; margin-top: 4px;
-	width: 104px;
-	flex-shrink: 0;
-	aspect-ratio: 12608972 / 3333695;
-	--minContent: 100;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: CENTER;
 }
 
 .text-pro {
@@ -630,24 +345,7 @@ body {
 	display: flex;
 	align-items: flex-end;
 	flex-grow: 1;
-	--minContent: 28;
-	--hSizing: FILL;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: STRETCH;
-	--pConstraintVertical: CENTER;
 }
-
-.graphic2 {
-	position: absolute; z-index: 7; top: 21px; left: 27px; 
-	width: 45px;
-	aspect-ratio: 1 / 1;
-	--minContent: 45;
-	--hSizing: FIXED;
-	--vSizing: FIXED;
-	--pConstraintHorizontal: MIN;
-	--pConstraintVertical: MIN;
-}
-
 
 
 /* container queries (flex rows) */

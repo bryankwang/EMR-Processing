@@ -1,0 +1,218 @@
+/* Professional Patients Page Styles */
+/* Navigation Bar Styles */
+.nav-bar { 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    z-index: 9000;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    position: fixed; top: 20px; left: 25px; 
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    z-index: 9002;
+}
+
+.wordmark {
+    position: fixed; top: 23px; left: 78px; 
+    width: 120px;
+    aspect-ratio: 3.5 / 1;
+    z-index: 9003;
+}
+
+.row1 {
+    position: fixed; top: 28px; left: 50%; 
+    translate: -50% 0;
+    margin-left: 26px;
+    width: calc(100% - 32px);
+    max-width: 537px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0px;
+    text-align: left;
+    z-index: 9001;
+    color: #fff;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    height: calc(100vh - 80px);
+    margin-top: 80px;
+    padding: 0;
+}
+
+/* Navigation Links */
+.nav-link {
+    text-decoration: none;
+    color: #fff;
+    transition: opacity 0.2s;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+}
+
+.nav-link.active {
+    border-bottom: 2px solid #fff;
+    padding-bottom: 2px;
+}
+
+/* Patient List Sidebar */
+.patients-sidebar {
+    width: 300px;
+    background: linear-gradient(180deg, rgba(164, 255, 166, 0.36) 0%, rgba(255, 255, 255, 0.12) 100%);
+    backdrop-filter: blur(12.7px);
+    border-right: 2px solid #49bbf8;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.search-box {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #49bbf8;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.search-box::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.patients-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.patient-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    background: rgba(73, 187, 248, 0.1);
+    border: 1px solid rgba(73, 187, 248, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.patient-item:hover {
+    background: rgba(73, 187, 248, 0.2);
+    transform: translateX(5px);
+}
+
+.patient-item.active {
+    background: rgba(73, 187, 248, 0.3);
+    border-color: #49bbf8;
+}
+
+.patient-name {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.patient-info {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* EMR Display Area */
+.emr-display {
+    flex-grow: 1;
+    padding: 30px;
+    background: rgba(28, 42, 137, 0.1);
+    overflow-y: auto;
+}
+
+.emr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.emr-title {
+    color: white;
+    font-size: 24px;
+    margin: 0;
+}
+
+.edit-emr-btn {
+    padding: 10px 20px;
+    background: #49bbf8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.edit-emr-btn:hover {
+    background: #3a94c7;
+}
+
+.emr-content {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(73, 187, 248, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.emr-section {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    color: #49bbf8;
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(73, 187, 248, 0.3);
+    padding-bottom: 5px;
+}
+
+.emr-field {
+    margin-bottom: 15px;
+}
+
+.field-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.field-value {
+    color: white;
+    font-size: 1em;
+}
+
+.no-emr-message {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 50px;
+    font-size: 1.2em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .patients-sidebar {
+        width: 100%;
+        max-height: 300px;
+    }
+    
+    .emr-display {
+        padding: 15px;
+    }
+}

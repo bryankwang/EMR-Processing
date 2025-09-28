@@ -1,0 +1,61 @@
+{
+    "weight": {"value": 75.0, "unit": "kg"},
+    "height": {"value": 180.0, "unit": "cm"},
+    "bmi": {"value": 23.15},
+    "medical_history": {
+        "conditions": [],
+        "surgeries": [
+            {"procedure": "Appendectomy", "date": "2024-10-26"}
+        ],
+        "immunizations": []
+    },
+    "family_history": {
+        "conditions": []
+    },
+    "social_history": {
+        "smoking_status": null,
+        "alcohol_use": null,
+        "exercise": null,
+        "occupation": null,
+        "living_situation": null
+    },
+    "allergies": [
+        {"allergen": "No known allergies", "reaction": null, "severity": null}
+    ],
+    "medications": [
+        {"name": "Ceftriaxone", "dosage": "1g", "frequency": "daily", "purpose": "IV antibiotics"},
+        {"name": "Paracetamol", "dosage": "500mg", "frequency": "every 6 hours", "purpose": "pain relief"}
+    ],
+    "vitals": {
+        "blood_pressure": "120/80 mmHg",
+        "heart_rate": 78,
+        "temperature": 37.0,
+        "respiratory_rate": 16,
+        "oxygen_saturation": 98
+    },
+    "tests_ordered": [
+        {"test_name": "CT scan", "reason": "suspected appendicitis", "date_ordered": "2024-10-25"}
+    ],
+    "test_results": [
+        {"test_name": "White blood cell count", "result": "elevated pre-surgery, normalized post-surgery", "date": "2024-10-26", "reference_range": "normal range"},
+        {"test_name": "CT scan", "result": "confirmed appendicitis", "date": "2024-10-25", "reference_range": "N/A"},
+        {"test_name": "Microbiology cultures", "result": "negative", "date": null, "reference_range": "N/A"}
+    ],
+    "billing_information": {
+        "diagnosis_codes": [
+            {
+                "code": "K35.80",
+                "description": "Acute appendicitis, unspecified",
+                "type": "primary"
+            }
+        ],
+        "procedure_codes": [
+            {
+                "cpt_code": "44970",
+                "description": "Appendectomy",
+                "estimated_cost": 1500.00
+            }
+        ],
+        "total_estimate": 1500.00
+    }
+}

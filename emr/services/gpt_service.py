@@ -1,14 +1,14 @@
 import os
+import json
 from typing import Dict, Any
-import openai
+from openai import OpenAI
 from django.conf import settings
 
 class GPTService:
     """Handles interactions with OpenAI's GPT for EMR processing."""
     
     def __init__(self):
-        self.api_key = settings.OPENAI_API_KEY
-        openai.api_key = self.api_key
+        self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
     def process_emr(self, emr_text: str) -> Dict[str, Any]:
         """
@@ -21,6 +21,14 @@ class GPTService:
             Dict containing processed EMR fields in JSON format
         """
         try:
+            # Create the tmp directory if it doesn't exist
+            os.makedirs(os.path.join(settings.MEDIA_ROOT, 'tmp'), exist_ok=True)
+            
+            # Save input text for debugging
+            input_file_path = os.path.join(settings.MEDIA_ROOT, 'tmp', 'last_emr_input.txt')
+            with open(input_file_path, 'w', encoding='utf-8') as f:
+                f.write(emr_text)
+
             # System message to instruct GPT on the task
             system_message = """
             You are a medical records processor. Extract information from the EMR text and format it into a structured JSON object with the following fields:
@@ -85,23 +93,33 @@ class GPTService:
             Extract all relevant information from the EMR text and format it according to this schema. 
             For any fields where information is not available, use null.
             Ensure all dates are in ISO format (YYYY-MM-DD).
-            Convert all measurements to metric units."""
-            
-            response = openai.ChatCompletion.create(
-                model="gpt-4",  # or your preferred model
+            Convert all measurements to metric units.
+            Please provide only the json object as the output, without any additional text or explanation."""
+
+            response = self.client.chat.completions.create(
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": system_message},
                     {"role": "user", "content": emr_text}
                 ],
-                temperature=0.0  # Keep it deterministic
+                response_format={ "type": "json_object" },
             )
             
             # Extract the response content
             processed_content = response.choices[0].message.content
             
             # You might want to add additional processing/validation here
-            
-            return processed_content
+            output_file_path = os.path.join(settings.MEDIA_ROOT, 'tmp', 'last_emr_output.json')
+            with open(output_file_path, 'w', encoding='utf-8') as f:
+                f.write(processed_content)
+
+            # Parse JSON string into dictionary before returning
+            try:
+                processed_dict = json.loads(processed_content)
+                return processed_dict
+            except json.JSONDecodeError as e:
+                print(f"Error parsing GPT response as JSON: {str(e)}")
+                return None
             
         except Exception as e:
             # Log the error

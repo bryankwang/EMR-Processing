@@ -53,8 +53,8 @@ class EMRProcessor:
             else:
                 # For PDF or non-EMR JSON, process through GPT
                 processed_data = self.gpt_service.process_emr(content if isinstance(content, str) else json.dumps(content))
-                if not processed_data:
-                    raise ValueError("Failed to process EMR through GPT")
+                if not processed_data or not isinstance(processed_data, dict):
+                    raise ValueError("Failed to process EMR through GPT or invalid response format")
             
             # Extract billing information from processed data
             billing_info = processed_data.get('billing_information', {})
