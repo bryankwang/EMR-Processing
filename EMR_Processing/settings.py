@@ -19,6 +19,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# OpenAI API Key (should be moved to environment variable in production)
+OPENAI_API_KEY = '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'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
