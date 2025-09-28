@@ -46,8 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'dashboard',
-    'emr',
-    'home'
+    'emr'
 ]
 
 MIDDLEWARE = [
@@ -133,7 +132,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'EMR_Processing', 'static'),
-    os.path.join(BASE_DIR, 'home', 'templates', 'patient-dashboard-html-css'),
 ]
 
 # Default primary key field type

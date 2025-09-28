@@ -17,11 +17,19 @@
           href="{% static 'css/style.css' %}">
     <meta name="viewport" content="width=device-width,
       initial-scale=1" />
+    <style>
+      .home-bg {
+        min-height: 100vh;
+        background-image: url('{% static "assets/BACKGROUND.png" %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    </style>
   </head>
   <body>
-    <div>
+  <div class="home-bg">
       {% block content %}
-      
       {% endblock content %}
     </div>
   </body>

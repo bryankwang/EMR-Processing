@@ -17,7 +17,7 @@ def login(request):
         user = authenticate(
             request,
             username = request.POST['Username'],
-            password = request.POST['password']
+            password = request.POST['Password']
         )
         if user is None:
             template_data['error'] ='The username or password is incorrect.'
@@ -25,4 +25,7 @@ def login(request):
                 {'template_data': template_data})
         else:
             auth_login(request, user)
-            return redirect('home.index')
+            if user.role == 'professional':
+                return redirect('dashboard/templates/professional-dashboard.html')
+    
+    return redirect('dashboard/templates/patient-dashboard.html')
